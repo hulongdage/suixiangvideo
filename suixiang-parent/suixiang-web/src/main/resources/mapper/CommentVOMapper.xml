@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.suixiang.mapper.CommentVOMapper" >
+  <resultMap id="BaseResultMap" type="com.suixiang.pojo.vo.CommentVO" >
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="visionId" property="visionid" jdbcType="VARCHAR" />
+    <result column="fromUserId" property="fromuserid" jdbcType="VARCHAR" />
+    <result column="creatTime" property="creattime" jdbcType="TIMESTAMP" />
+    <result column="comment" property="comment" jdbcType="LONGVARCHAR" />
+    <result column="headImage" property="headimage" jdbcType="VARCHAR" />
+    <result column="nickname" property="nickname" jdbcType="VARCHAR" />
+    <result column="toNickname" property="toNickname" jdbcType="VARCHAR" />
+  </resultMap>
+  
+<!--   	select c.*,u.face_image as face_image,u.nickname from comments c left join users u on c.from_user_id = u.id -->
+<!--   	where c.video_id = #{videoId} order by c.create_time desc -->
+  <select id="queryComments" resultMap="BaseResultMap" parameterType="String">
+	select c.*,u.headImage as headImage,u.nickname,tu.nickname as toNickname 
+	from comment c 
+	left join user u on c.fromUserId = u.id
+	left join user tu on c.toUserId = tu.id
+  	where c.visionId = #{videoId} order by c.creatTime desc
+  </select>
+  
+</mapper>

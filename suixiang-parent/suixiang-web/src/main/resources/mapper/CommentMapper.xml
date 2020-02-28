@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.suixiang.mapper.CommentMapper" >
+  <resultMap id="BaseResultMap" type="com.suixiang.pojo.Comment" >
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="fCommentId" property="fcommentid" jdbcType="VARCHAR" />
+    <result column="toUserId" property="touserid" jdbcType="VARCHAR" />
+    <result column="visionId" property="visionid" jdbcType="VARCHAR" />
+    <result column="fromUserId" property="fromuserid" jdbcType="VARCHAR" />
+    <result column="creatTime" property="creattime" jdbcType="TIMESTAMP" />
+    <result column="comment" property="comment" jdbcType="LONGVARCHAR" />
+  </resultMap>
+</mapper>

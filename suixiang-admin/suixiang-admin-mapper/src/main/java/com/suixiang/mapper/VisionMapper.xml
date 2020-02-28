@@ -1,0 +1,323 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.suixiang.mapper.VisionMapper" >
+  <resultMap id="BaseResultMap" type="com.suixiang.pojo.Vision" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="userId" property="userid" jdbcType="VARCHAR" />
+    <result column="audioId" property="audioid" jdbcType="VARCHAR" />
+    <result column="visionDesc" property="visiondesc" jdbcType="VARCHAR" />
+    <result column="visionPath" property="visionpath" jdbcType="VARCHAR" />
+    <result column="visionSeconds" property="visionseconds" jdbcType="REAL" />
+    <result column="visionWidth" property="visionwidth" jdbcType="INTEGER" />
+    <result column="visionHeight" property="visionheight" jdbcType="INTEGER" />
+    <result column="coverPath" property="coverpath" jdbcType="VARCHAR" />
+    <result column="loveCount" property="lovecount" jdbcType="BIGINT" />
+    <result column="status" property="status" jdbcType="INTEGER" />
+    <result column="creatTime" property="creattime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, userId, audioId, visionDesc, visionPath, visionSeconds, visionWidth, visionHeight, 
+    coverPath, loveCount, status, creatTime
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.suixiang.pojo.VisionExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from vision
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from vision
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from vision
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.suixiang.pojo.VisionExample" >
+    delete from vision
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.suixiang.pojo.Vision" >
+    insert into vision (id, userId, audioId, 
+      visionDesc, visionPath, visionSeconds, 
+      visionWidth, visionHeight, coverPath, 
+      loveCount, status, creatTime
+      )
+    values (#{id,jdbcType=VARCHAR}, #{userid,jdbcType=VARCHAR}, #{audioid,jdbcType=VARCHAR}, 
+      #{visiondesc,jdbcType=VARCHAR}, #{visionpath,jdbcType=VARCHAR}, #{visionseconds,jdbcType=REAL}, 
+      #{visionwidth,jdbcType=INTEGER}, #{visionheight,jdbcType=INTEGER}, #{coverpath,jdbcType=VARCHAR}, 
+      #{lovecount,jdbcType=BIGINT}, #{status,jdbcType=INTEGER}, #{creattime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.suixiang.pojo.Vision" >
+    insert into vision
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="userid != null" >
+        userId,
+      </if>
+      <if test="audioid != null" >
+        audioId,
+      </if>
+      <if test="visiondesc != null" >
+        visionDesc,
+      </if>
+      <if test="visionpath != null" >
+        visionPath,
+      </if>
+      <if test="visionseconds != null" >
+        visionSeconds,
+      </if>
+      <if test="visionwidth != null" >
+        visionWidth,
+      </if>
+      <if test="visionheight != null" >
+        visionHeight,
+      </if>
+      <if test="coverpath != null" >
+        coverPath,
+      </if>
+      <if test="lovecount != null" >
+        loveCount,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="creattime != null" >
+        creatTime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="userid != null" >
+        #{userid,jdbcType=VARCHAR},
+      </if>
+      <if test="audioid != null" >
+        #{audioid,jdbcType=VARCHAR},
+      </if>
+      <if test="visiondesc != null" >
+        #{visiondesc,jdbcType=VARCHAR},
+      </if>
+      <if test="visionpath != null" >
+        #{visionpath,jdbcType=VARCHAR},
+      </if>
+      <if test="visionseconds != null" >
+        #{visionseconds,jdbcType=REAL},
+      </if>
+      <if test="visionwidth != null" >
+        #{visionwidth,jdbcType=INTEGER},
+      </if>
+      <if test="visionheight != null" >
+        #{visionheight,jdbcType=INTEGER},
+      </if>
+      <if test="coverpath != null" >
+        #{coverpath,jdbcType=VARCHAR},
+      </if>
+      <if test="lovecount != null" >
+        #{lovecount,jdbcType=BIGINT},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="creattime != null" >
+        #{creattime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.suixiang.pojo.VisionExample" resultType="java.lang.Integer" >
+    select count(*) from vision
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update vision
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userid != null" >
+        userId = #{record.userid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.audioid != null" >
+        audioId = #{record.audioid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.visiondesc != null" >
+        visionDesc = #{record.visiondesc,jdbcType=VARCHAR},
+      </if>
+      <if test="record.visionpath != null" >
+        visionPath = #{record.visionpath,jdbcType=VARCHAR},
+      </if>
+      <if test="record.visionseconds != null" >
+        visionSeconds = #{record.visionseconds,jdbcType=REAL},
+      </if>
+      <if test="record.visionwidth != null" >
+        visionWidth = #{record.visionwidth,jdbcType=INTEGER},
+      </if>
+      <if test="record.visionheight != null" >
+        visionHeight = #{record.visionheight,jdbcType=INTEGER},
+      </if>
+      <if test="record.coverpath != null" >
+        coverPath = #{record.coverpath,jdbcType=VARCHAR},
+      </if>
+      <if test="record.lovecount != null" >
+        loveCount = #{record.lovecount,jdbcType=BIGINT},
+      </if>
+      <if test="record.status != null" >
+        status = #{record.status,jdbcType=INTEGER},
+      </if>
+      <if test="record.creattime != null" >
+        creatTime = #{record.creattime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update vision
+    set id = #{record.id,jdbcType=VARCHAR},
+      userId = #{record.userid,jdbcType=VARCHAR},
+      audioId = #{record.audioid,jdbcType=VARCHAR},
+      visionDesc = #{record.visiondesc,jdbcType=VARCHAR},
+      visionPath = #{record.visionpath,jdbcType=VARCHAR},
+      visionSeconds = #{record.visionseconds,jdbcType=REAL},
+      visionWidth = #{record.visionwidth,jdbcType=INTEGER},
+      visionHeight = #{record.visionheight,jdbcType=INTEGER},
+      coverPath = #{record.coverpath,jdbcType=VARCHAR},
+      loveCount = #{record.lovecount,jdbcType=BIGINT},
+      status = #{record.status,jdbcType=INTEGER},
+      creatTime = #{record.creattime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.suixiang.pojo.Vision" >
+    update vision
+    <set >
+      <if test="userid != null" >
+        userId = #{userid,jdbcType=VARCHAR},
+      </if>
+      <if test="audioid != null" >
+        audioId = #{audioid,jdbcType=VARCHAR},
+      </if>
+      <if test="visiondesc != null" >
+        visionDesc = #{visiondesc,jdbcType=VARCHAR},
+      </if>
+      <if test="visionpath != null" >
+        visionPath = #{visionpath,jdbcType=VARCHAR},
+      </if>
+      <if test="visionseconds != null" >
+        visionSeconds = #{visionseconds,jdbcType=REAL},
+      </if>
+      <if test="visionwidth != null" >
+        visionWidth = #{visionwidth,jdbcType=INTEGER},
+      </if>
+      <if test="visionheight != null" >
+        visionHeight = #{visionheight,jdbcType=INTEGER},
+      </if>
+      <if test="coverpath != null" >
+        coverPath = #{coverpath,jdbcType=VARCHAR},
+      </if>
+      <if test="lovecount != null" >
+        loveCount = #{lovecount,jdbcType=BIGINT},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="creattime != null" >
+        creatTime = #{creattime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.suixiang.pojo.Vision" >
+    update vision
+    set userId = #{userid,jdbcType=VARCHAR},
+      audioId = #{audioid,jdbcType=VARCHAR},
+      visionDesc = #{visiondesc,jdbcType=VARCHAR},
+      visionPath = #{visionpath,jdbcType=VARCHAR},
+      visionSeconds = #{visionseconds,jdbcType=REAL},
+      visionWidth = #{visionwidth,jdbcType=INTEGER},
+      visionHeight = #{visionheight,jdbcType=INTEGER},
+      coverPath = #{coverpath,jdbcType=VARCHAR},
+      loveCount = #{lovecount,jdbcType=BIGINT},
+      status = #{status,jdbcType=INTEGER},
+      creatTime = #{creattime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

@@ -1,0 +1,20 @@
+<!--index.wxml-->
+<import src="../../template/item-template.wxml"/>
+<view class="container">     
+    <view class="index_box2">
+    <view class="text">
+        <view class="line_y"></view>
+        <text>短视频展示</text>
+       <button size="mini"  bindtap="nextVideoList">换一批</button>
+    </view>
+    <view wx:for="{{videoList}}" class="index_anli" wx:key="item.id">
+        <view class="index_anli_v"  >
+          <image src="{{serverUrl}}{{item.coverpath}}"  mode="widthFix" bindtap='showVideoDetail' data-arrindex='{{index}}'></image>
+          <text>{{item.nickname}}</text>
+        </view>
+        
+    </view>
+    </view>
+
+</view>
+

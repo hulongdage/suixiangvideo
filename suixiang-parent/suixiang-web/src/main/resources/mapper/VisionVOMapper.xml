@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.suixiang.mapper.VisionVOMapper" >
+  <resultMap id="BaseResultMap" type="com.suixiang.pojo.vo.VisionVO" >
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="userId" property="userid" jdbcType="VARCHAR" />
+    <result column="audioId" property="audioid" jdbcType="VARCHAR" />
+    <result column="visionDesc" property="visiondesc" jdbcType="VARCHAR" />
+    <result column="visionPath" property="visionpath" jdbcType="VARCHAR" />
+    <result column="visionSeconds" property="visionseconds" jdbcType="REAL" />
+    <result column="visionWidth" property="visionwidth" jdbcType="INTEGER" />
+    <result column="visionHeight" property="visionheight" jdbcType="INTEGER" />
+    <result column="coverPath" property="coverpath" jdbcType="VARCHAR" />
+    <result column="loveCount" property="lovecount" jdbcType="BIGINT" />
+    <result column="status" property="status" jdbcType="INTEGER" />
+    <result column="creatTime" property="creattime" jdbcType="TIMESTAMP" />
+    <result column="headImage" property="headImage" jdbcType="VARCHAR" />
+    <result column="nickname" property="nickname" jdbcType="VARCHAR" />
+  </resultMap>
+  
+  <select id="queryVisionVOList" resultMap="BaseResultMap">
+      select v.*,u.headImage as headImage,u.nickname as nickname from vision v 
+      left join user u on u.id = v.userId
+      where 
+         1 = 1
+         and v.status = 1
+      order by v.creatTime desc
+  </select>
+  <select id="queryHotVisionVOList" resultMap="BaseResultMap">
+      select v.*,u.headImage as headImage,u.nickname as nickname from vision v 
+      left join user u on u.id = v.userId
+      where 
+         1 = 1
+         and v.status = 1
+      order by v.loveCount desc
+  </select>
+  <select id="queryVisionVOListByDesc" resultMap="BaseResultMap" parameterType="String">
+      select v.*,u.headImage as headImage,u.nickname as nickname from vision v 
+      left join user u on u.id = v.userId
+      where 
+         1 = 1
+         <if test=" visionDesc != null and visionDesc != '' ">
+             and v.visionDesc like '%${visionDesc}%'
+         </if>
+         <if test=" userId != null and userId != '' ">  
+			and v.userId = #{userId}
+		</if>
+         and v.status = 1
+      order by v.creatTime desc
+  </select>
+  <!-- 查询我喜欢的视频 -->
+	<select id="queryMyLikeVideos" resultMap="BaseResultMap" parameterType="String">
+		select v.*,u.headImage as headImage,u.nickname as nickname from vision v 
+		left join user u on v.userId = u.id
+		where 
+			v.id in (select uv.visionId from user_vision uv where uv.userId = #{userId})
+			and v.status = 1
+			order by v.creatTime desc
+	</select>
+	<!-- 查询我关注的人发的视频 -->
+	<select id="queryMyFollowVideos" resultMap="BaseResultMap" parameterType="String">
+		select v.*,u.headImage as headImage,u.nickname as nickname from vision v 
+		left join user u on v.userId = u.id
+		where 
+			v.userId in (select uf.userId from user_fans uf where uf.fansId = #{userId})
+			and v.status = 1
+			order by v.creatTime desc
+	</select>
+  <update id="increaseVideoLoveCount" parameterType="String">
+         update vision set loveCount=loveCount+1 where id=#{videoId}
+  </update>
+  <update id="decreaseVideoLoveCount" parameterType="String">
+         update vision set loveCount=loveCount-1 where id=#{videoId}
+  </update>
+</mapper>

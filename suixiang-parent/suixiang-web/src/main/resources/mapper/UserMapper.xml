@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.suixiang.mapper.UserMapper" >
+  <resultMap id="BaseResultMap" type="com.suixiang.pojo.User" >
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="username" property="username" jdbcType="VARCHAR" />
+    <result column="password" property="password" jdbcType="VARCHAR" />
+    <result column="headImage" property="headimage" jdbcType="VARCHAR" />
+    <result column="nickname" property="nickname" jdbcType="VARCHAR" />
+    <result column="countFan" property="countfan" jdbcType="INTEGER" />
+    <result column="countCon" property="countcon" jdbcType="INTEGER" />
+    <result column="countLove" property="countlove" jdbcType="INTEGER" />
+  </resultMap>
+  <update id="increaseUserLoveCount" parameterType="String">
+         update user set countLove=countLove+1 where id=#{userId}
+  </update>
+  <update id="decreaseUserLoveCount" parameterType="String">
+         update user set countLove=countLove-1 where id=#{userId}
+  </update>
+  <update id="increaseFansCount" parameterType="String">
+         update user set countFan=countFan+1 where id=#{userId}
+  </update>
+  <update id="decreaseFansCount" parameterType="String">
+         update user set countFan=countFan-1 where id=#{userId}
+  </update>
+  <update id="increaseConCount" parameterType="String">
+         update user set countCon=countCon+1 where id=#{userId}
+  </update>
+  <update id="decreaseConCount" parameterType="String">
+         update user set countCon=countCon-1 where id=#{userId}
+  </update>
+</mapper>

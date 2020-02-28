@@ -1,0 +1,65 @@
+<!-- 视频资源 -->
+ 
+<video id="myVideo" src="{{serverUrl}}{{videoList[vid].visionpath}}" danmu-list="{{danmuList}}" autoplay='false' show-fullscreen-btn='false' 
+poster=""  show-center-play-btn='false' objectFit='fill' style='height:{{video_heighe}}vh;'></video>
+<!-- 点击滑动蒙版图层 -->
+<cover-view data-time="{{lastTapTime}}" class="ball{{ball_height}}" id="id" bindtap="multipleTap" bindtouchstart='touchstart' bindtouchend='touchend'>
+  <!-- 播放按钮 -->
+  <cover-image src='/img/play.png' class='videoplay' style='display:{{display_play}}'></cover-image>
+</cover-view>
+<cover-view class='comment_border' style='display:{{display_pl}}'>
+  <cover-view class='sidebar_b_rt'>
+    <!-- 头像 -->
+    <cover-image src='../../img/Rotation_chart.jpg' data-userid='{{item.userid}}' class='head_img' catchtap=''></cover-image>
+    <!-- <cover-view class='jia'>+</cover-view> -->
+  </cover-view>
+  <!-- 赞 -->
+  <cover-view class='sidebar_b_rt'>
+    <cover-image src="{{not_zan?'/img/fabulous1.png':'/img/fabulous.png'}}" catchtap='toCollect' class='comment_img ' data-vid='{{item.vid}}' data-uid='{{item.userid}}'></cover-image>
+    <!-- 赞数 -->
+    <cover-view class='comment_num' catchtap='toCollect'>赞</cover-view>
+  </cover-view>
+  <!-- 评论 -->
+  <cover-view class='sidebar_b_rt'>
+    <cover-image src='/img/comment.png' class='comment_img ' catchtap='showModal' data-vid="{{item.vid}}" data-img_url='{{item.wapimg}}'></cover-image>
+    <!-- 评论数 -->
+    <cover-view class='comment_num' catchtap='showModal' data-vid="{{item.vid}}" data-img_url='{{item.wapimg}}'>{{commentList.length}}</cover-view>
+  </cover-view>
+  <!-- 分享 -->
+  <cover-view class='sidebar_b_rt'>
+    <button class='comment__button' open-type='share'>
+      <cover-image src='/img/share.png' class='comment_num'>转发</cover-image>
+    </button>
+    <!-- 转发数 -->
+    <cover-view class='comment_num'>分享</cover-view>
+  </cover-view>
+</cover-view>
+<!-- 隐藏评论窗口按钮 -->
+<view animation="{{animationData}}" class="commodity_attr_box" wx:if="{{showModalStatus}}">
+  <!-- 评论遍历 -->
+  <view class="commentTitle">
+    <image src='/img/pl.png' class='img'></image>
+    <text>评论({{commentList.length}})</text>
+    <image class='down' src='/img/down.png' bindtap='hideModal'></image>
+  </view>
+  <scroll-view scroll-y='true' style='height:500rpx'>
+    <block wx:for='{{commentList}}' wx:key='item.vid'>
+      <view class="commentContent">
+        <view class="contentLeft">
+          <view>{{item.username}}</view>
+          <view>{{item.ComID}}楼 {{item.ComTime}}</view>
+        </view>
+        <view class="clear"></view>
+        <view class="Comment">
+          <text>{{item.ComContent}}</text>
+        </view>
+      </view>
+    </block>
+  </scroll-view>
+  <view class="commentInput">
+    <input placeholder="请填写评论内容 " class="input_box" bindblur='getComment' />
+    <button class="comment_btn" bindtap='bindContent' data-vid='{{vid}}'>
+      <text class='comment_txt'>发送</text>
+    </button>
+  </view>
+</view>

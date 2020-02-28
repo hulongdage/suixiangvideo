@@ -1,0 +1,32 @@
+<view class="container">
+    <view class="common_banner"> <image mode="widthFix" src="/image/1.jpg"></image></view>
+    <view class="index_box2">
+    <view class="text">
+        <view class="line_y"></view>
+        <text>产品展示</text>
+    </view>
+    <view class="index_anli">
+        <view class="index_anli_v"  data-type="美味中秋月饼">
+          <image mode="widthFix" src="/image/pro.jpg"></image>
+          <text>美味中秋月饼</text>
+        </view>
+         <view class="index_anli_v"  data-type="美味中秋月饼">
+          <image mode="widthFix" src="/image/pro2.jpg"></image>
+          <text>美味中秋月饼</text>
+        </view>
+         <view class="index_anli_v"  data-type="美味中秋月饼">
+          <image mode="widthFix" src="/image/pro3.jpg"></image>
+          <text>美味中秋月饼</text>
+        </view>
+         <view class="index_anli_v"  data-type="美味中秋月饼">
+          <image mode="widthFix" src="/image/pro4.jpg"></image>
+          <text>美味中秋月饼</text>
+        </view>
+        
+    </view>
+    </view>
+    
+    <view class="container">
+        <text class="daodi">起航网络工作室版权所有</text>
+    </view>
+</view>

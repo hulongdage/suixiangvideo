@@ -1,0 +1,46 @@
+<!--index.wxml-->
+<view class="videoBox">
+  <view class="video {{touch==true? 'transfrom' : '' }}" style="transform:translateY(-{{current*100}}%);" bindtouchstart='touchstart' bindtouchmove='touchmove' bindtouchend='touchend' bindtouchcancel='touchcancel'>
+    <view wx:for="{{videoList}}" class='videoitem' wx:key="{{item}}" >
+      <video src="{{serverUrl}}{{item.visionpath}}" id="videoplayer" bindtimeupdate="videoUpdate"  data-arrindex='{{index}}'  wx:if="{{current==index}}" object-fit="contain" loop='{{false}}' autoplay='{{true}}' custom-cache="{{true}}"  show-progress="{{true}}" bindplay="bindPlay" 
+      danmu-list="{{showDanmuList}}" enable-danmu="{{true}}" danmu-btn="{{true}}"
+   poster="{{serverUrl}}{{item.coverpath}}">
+        <cover-view class='viseocontainer'>
+            <!-- 上传视频 -->
+            <cover-image src='../resource/images/camera.png' style='width:50rpx;height:50rpx;' bindtap='uploadVideo'></cover-image>
+            <!-- 搜索按钮 -->
+            <cover-image src='../resource/images/search.png' style='width:45rpx;height:45rpx;' bindtap='showSearch'></cover-image>
+        </cover-view>
+
+<cover-view class='container-me'>
+            <!-- 头像 -->
+            <cover-image class="face" src='{{serverUrl}}{{item.headImage}}' bindtap='toPublisherDetail'></cover-image>
+            <!-- 喜欢收藏按钮 -->
+            <block wx:if="{{userLoveVideo}}">
+                <cover-image class="size-me" src='../resource/images/like.png' style='margin-top:30rpx;' bindtap='loveVideoOrNot' data-arrindex='{{index}}'></cover-image>
+            </block>
+            <block wx:else>
+                <cover-image class="size-me" src='../resource/images/unlike.png' style='margin-top:30rpx;' bindtap='loveVideoOrNot' data-arrindex='{{index}}'></cover-image>
+            </block>
+            <!-- 评论按钮 -->
+            <cover-image class="size-me" src='../resource/images/comments.png' style='margin-top:30rpx;' bindtap='writeComment'></cover-image>
+            <!-- 分享按钮 -->
+            <cover-image class="size-me" src='../resource/images/share.png' style='margin-top:30rpx;' bindtap='shareVideo'></cover-image>
+        </cover-view>
+
+      <cover-view class='container-words'>
+            <cover-view>@{{item.nickname}}</cover-view>
+            <cover-view class='video-desc'>{{item.visiondesc}}</cover-view>
+        </cover-view>
+
+     <cover-view class='container-bottom'>
+            <!-- 首页按钮 -->
+            <cover-image class='' src='../resource/images/index.png' class="size-bottom" bindtap='toIndex'></cover-image>    
+            <!-- 我的按钮 -->
+            <cover-image class='' src='../resource/images/mine.png' class="size-bottom" bindtap='toUserDetail'></cover-image>
+        </cover-view>
+      </video>
+    </view>
+    
+  </view>
+</view>
